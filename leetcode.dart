@@ -1,30 +1,19 @@
 import 'package:leetcode/leetcode.dart' as leetcode;
 
-void main() {
-  print("palindrome question");
-  void checkPalindrome(int x) {
+
+class Solution {
+  bool isPalindrome(int x) {
+    if (x < 0) return false;
 
     List<String> digits = x.toString().split('');
-
     List<String> reversedDigits = digits.reversed.toList();
-
-
     int reversedNum = int.parse(reversedDigits.join(''));
 
-    if (x == reversedNum) {
-      print("$x is a palindrome");
-    } else {
-      print("$x is not a palindrome");
-    }
-
-
-
-
-
+    return x == reversedNum;
   }
-  checkPalindrome(121);
-  checkPalindrome(1421);
-print("==================================================");
+}
+
+
   print("merge two sorted lists");
   void merge(List<int> l1,List<int> l2){
     List <int> l3 = l1+l2;
@@ -33,79 +22,87 @@ print("==================================================");
 
 
   }
-  merge([1,2,3,5,],[5,7,54,1,2]);
+print("merge two sorted lists");
+
+  void mergeSortedLists(List<int> firstList, List<int> secondList) {
+    List<int> mergedList = firstList + secondList;
+    mergedList.sort();
+    print(mergedList);
+  }
+
+  mergeSortedLists([1, 2, 3, 5], [5, 7, 54, 1, 2]);
 
   print("========================");
   print("roman to int");
-  void roman(String s){
-    int I=1;
-    int V=5;
-    int X=10;
-    int L=50;
-    int C=100;
-    int D=500;
-    int M=1000;
-    int total=0;
 
-    for (int i = 0; i < s.length; i++) {
-      int current = 0;
+  void convertRomanToInt(String romanNumeral) {
+    int I = 1, V = 5, X = 10, L = 50, C = 100, D = 500, M = 1000;
+    int totalValue = 0;
 
-      // Get the value of the current Roman numeral
-      if (s[i] == 'I') current = I;
-      else if (s[i] == 'V') current = V;
-      else if (s[i] == 'X') current = X;
-      else if (s[i] == 'L') current = L;
-      else if (s[i] == 'C') current = C;
-      else if (s[i] == 'D') current = D;
-      else if (s[i] == 'M') current = M;
+    for (int i = 0; i < romanNumeral.length; i++) {
+      int currentValue = 0;
 
+      if (romanNumeral[i] == 'I') currentValue = I;
+      else if (romanNumeral[i] == 'V') currentValue = V;
+      else if (romanNumeral[i] == 'X') currentValue = X;
+      else if (romanNumeral[i] == 'L') currentValue = L;
+      else if (romanNumeral[i] == 'C') currentValue = C;
+      else if (romanNumeral[i] == 'D') currentValue = D;
+      else if (romanNumeral[i] == 'M') currentValue = M;
 
-      int next = 0;
-      if (i + 1 < s.length) {
-        if (s[i + 1] == 'I') next = I;
-        else if (s[i + 1] == 'V') next = V;
-        else if (s[i + 1] == 'X') next = X;
-        else if (s[i + 1] == 'L') next = L;
-        else if (s[i + 1] == 'C') next = C;
-        else if (s[i + 1] == 'D') next = D;
-        else if (s[i + 1] == 'M') next = M;
+      int nextValue = 0;
+      if (i + 1 < romanNumeral.length) {
+        if (romanNumeral[i + 1] == 'I') nextValue = I;
+        else if (romanNumeral[i + 1] == 'V') nextValue = V;
+        else if (romanNumeral[i + 1] == 'X') nextValue = X;
+        else if (romanNumeral[i + 1] == 'L') nextValue = L;
+        else if (romanNumeral[i + 1] == 'C') nextValue = C;
+        else if (romanNumeral[i + 1] == 'D') nextValue = D;
+        else if (romanNumeral[i + 1] == 'M') nextValue = M;
       }
 
-      if (current < next) {
-        total -= current;
+      if (currentValue < nextValue) {
+        totalValue -= currentValue;
       } else {
-        total += current;
+        totalValue += currentValue;
       }
     }
 
-    print(total);
-
+    print(totalValue);
   }
-  roman("III");
-  roman("MCMXCIV");
-  roman("LVIII");
- print("=================");
- print("two sum");
- void sum(List<int> l,int target){
-   for(int i=0 ;i<l.length;i++){
-     for(int j=0;j<l.length;j++){
-       if (i == j) continue;
-       if(l[i]+l[j]==target){
-         print("[$i,$j]");
-         return;
-       }
-     }
-   }
- }
- sum([2,7,11,15],9);
-  sum([3,2,4],6);
- print("============================");
- print("remove_duplicates");
-  void remove(List<int> x){
-    Set<int> uniqueNumbers = x.toSet();
+
+  convertRomanToInt("III");
+  convertRomanToInt("MCMXCIV");
+  convertRomanToInt("LVIII");
+
+  print("=================");
+  print("two sum");
+
+  void findTwoSumIndices(List<int> numbers, int targetSum) {
+    for (int i = 0; i < numbers.length; i++) {
+      for (int j = 0; j < numbers.length; j++) {
+        if (i == j) continue;
+
+        if (numbers[i] + numbers[j] == targetSum) {
+          print("[$i,$j]");
+          return;
+        }
+      }
+    }
+  }
+
+  findTwoSumIndices([2, 7, 11, 15], 9);
+  findTwoSumIndices([3, 2, 4], 6);
+
+  print("============================");
+  print("remove_duplicates");
+
+  void removeDuplicatesFromList(List<int> numbers) {
+    Set<int> uniqueNumbers = numbers.toSet();
     print(uniqueNumbers.length);
     print(uniqueNumbers.toList());
-
   }
-  remove([0,0,1,1,1,2,2,3,3,4]);
+
+  removeDuplicatesFromList([0, 0, 1, 1, 1, 2, 2, 3, 3, 4]);
 }
+ 
